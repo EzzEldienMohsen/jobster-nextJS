@@ -28,11 +28,12 @@ const JobsList: React.FC = () => {
     setCurrentPage(Number(params.get('page')) || 1);
   }, [params]);
 
-  if (isPending) return (
-    <div className="loading loading-spinner text-primary loading-lg"></div>
-  );
+  if (isPending)
+    return (
+      <div className="loading loading-spinner text-primary loading-lg"></div>
+    );
   if (jobs.length === 0) {
-    return <h2 className="text-xl">No Jobs Found...</h2>;
+    return <h2 className="text-xl">No Jobs Found....</h2>;
   }
 
   return (
