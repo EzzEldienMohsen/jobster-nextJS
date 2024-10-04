@@ -51,7 +51,7 @@ type AllJobReturn = {
 export const getAllJobsAction = async ({
   search,
   jobStatus,
-  page=1,
+  page = 1,
   limit = 20,
 }: GetAllJobsTypes): Promise<AllJobReturn> => {
   const userId = authenticateAndRedirect();
@@ -136,15 +136,18 @@ export const getSingleJobAction = async (
         clerkId: userId,
       },
     });
+
+    if (!job) {
+      console.error(`Job with ID ${id} not found or unauthorized.`);
+      redirect('/jobs'); // Redirect if job not found
+    }
   } catch (error) {
-    job = null;
+    console.error('Error fetching job:', error);
+    redirect('/jobs'); // Handle and log error, then redirect
   }
-  if (!job) {
-    redirect('/jobs');
-  }
+
   return job;
 };
-
 export const updateJobAction = async (
   id: string,
   values: CreateAndEditJobType
