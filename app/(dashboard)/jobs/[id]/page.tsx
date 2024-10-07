@@ -14,11 +14,14 @@ const SingleJobPage: React.FC<{ params: { id: string } }> = async ({
 }) => {
   const { id } = params;
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
+ if(!id){
+
+ }else{
+   await queryClient.prefetchQuery({
     queryKey: ['job', id],
     queryFn: () => getSingleJobAction(id),
   });
-
+ }
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <EditJobForm jobId={id} />
