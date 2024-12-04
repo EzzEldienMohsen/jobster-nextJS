@@ -1,0 +1,8 @@
+{
+  "build": {
+    "env": {
+      "DATABASE_URL": "/utils/db.ts"
+    }
+  },
+  "buildCommand": "npm run build && npx prisma generate"
+}
